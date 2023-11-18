@@ -7,6 +7,15 @@ api_url = 'https://api.hella.team/method/'
 
 class Client():
 	
+	async def get_token(self,
+		url: str,
+		method: str = "GET",
+		params: dict | None = None) -> dict:
+		async with ClientSession() as session:
+				async with session.request(url=url, method=method, params=params) as request:
+					return await request.json()
+					
+
 	async def request_json(
 		self,
 		url: str,
