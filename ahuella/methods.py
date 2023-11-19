@@ -38,39 +38,38 @@ class HAPI():
         del params['self']
         return params
     
-    async def getStickers(self, user_id: int | str) -> FinalGetStickers:
+    async def get_stickers(self, user_id: int | str) -> FinalGetStickers:
         params = self.add_param(locals())
         response = await Client().request_json(url=api_url + "getStickers", params=params)
         sort = JsonResponse(response)
         return sort
 
-    async def getGroups(self, user_id: int | str) -> Exception:
+    async def get_groups(self, user_id: int | str) -> Exception:
         """Method not available as of 11/16/23"""
         params = self.add_param(locals())
         response = await Client().request_json(url=api_url + "getGroups", params=params)
         sort = JsonResponse(response)
         return sort
     
-    async def getSticker(self, sticker_id: int,  product_id: int ) -> FinalGetSticker:
+    async def get_sticker(self, sticker_id: int,  product_id: int ) -> FinalGetSticker:
         params = self.add_param(locals())
         response = await Client().request_json(url=api_url + "getSticker", params=params)
-        print(response)
         sort = JsonResponse(response)
         return sort
     
-    async def GenerationTTS(self, text: str, speaker: int = 1) -> bytes:
+    async def generation_tts(self, text: str, speaker: int = 1) -> bytes:
         """Only russian text"""
         params = self.add_param(locals())
         response = await Client().request_content(url=api_url + "GenerationTTS", params=params)
         return response				
 	
-    async def solveCaptcha(self, sid: int) -> FinalCaptcha:
+    async def solve_captcha(self, sid: int) -> FinalCaptcha:
         params = self.add_param(locals())
         response = await Client().request_json(url=api_url + "solveCaptcha", params=params)
         sort = JsonResponse(response)
         return sort
     
-    async def GenerationQuotes(self,
+    async def generation_quotes(self,
                               ava: str,
                               member_id: int,
                               screen_name: str,
