@@ -3,9 +3,9 @@
 ```python
 import asyncio
 
-from ahuella import HellaApi
+from ahuella.v2 import HellaApiv2 #class for API version 1
 
-hella = HellaApi("YOU TOKEN")
+hella = HellaApiv2("YOU TOKEN")
 
 
 async def first_request():
@@ -20,4 +20,3 @@ asyncio.run(first_request())
 ```shell
 pip install ahuella
 ```
-
