@@ -1,4 +1,2 @@
-from .api import HellaAPI
-
-__version__ = 0.1
+__version__ = 0.2
 __authors__ = ["t.me/tenkawaa", "t.me/tembzz"]
