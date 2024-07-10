@@ -3,7 +3,7 @@
 ```python
 import asyncio
 
-from ahuella.v2 import HellaApiv2 #class for API version 1
+from ahuella.v2 import HellaApiv2 #class for API version 2
 
 hella = HellaApiv2("YOU TOKEN")
 
