@@ -1,6 +1,10 @@
 from aiohttp import ClientSession, ClientResponse, FormData
 
 class AiohttpSession:
+    
+    def __init__(self) -> None:
+        
+        self.session = None
 
     async def request_raw(
             self,
@@ -9,11 +13,14 @@ class AiohttpSession:
             data: dict | None = None,
             **request_params
     ) -> ClientResponse:
+        
+        if not self.session:
+            self.session = ClientSession()
 
-        async with ClientSession() as session:
-            response = await session.request(method=method, url=url, data=data, **request_params)
-            await response.read()
-            return response
+        async with self.session as session:
+            async with session.request(method=method, url=url, data=data, **request_params) as response:
+                await response.read()
+                return response
         
     async def request_json(
             self,
