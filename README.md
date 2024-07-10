@@ -9,7 +9,7 @@ hella = HellaApi("YOU TOKEN")
 
 
 async def first_request():
-  stickers = await hella.get_stickers(user_id=323)
+  stickers = await hella.get_stickers(user_id=1)
   print(stickers.items.free.count)
   # >>> 50
 
