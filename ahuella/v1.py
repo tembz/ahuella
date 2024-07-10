@@ -1,5 +1,6 @@
 from dacite import from_dict
 
+from .aiohttp import FormData
 from .api import ABCHella
 from .models import v1
 
@@ -34,7 +35,28 @@ class HellaApiv1(ABCHella):
         return response
 
     async def generation_quotes(self, ava: bytes | str, member_id: int, screen_name: str, name: str, background_number: int = 1, sticker: bytes | str | None = None, background: bytes | str | None = None, text: str | None = None) -> bytes:
-        ...
+        sorted_params = self.sort_data(locals())
+        params = {**sorted_params, **self.params}
+        data = FormData()
+
+        if sticker:
+            if isinstance(sticker, str):
+                sticker = await self.session.request_bytes(sticker)
+            data.add_field('sticker_bytes', sticker, filename='sticker_bytes.png')
+            del params["sticker"]
+        if background:
+            if isinstance(background, str):
+                background = await self.session.request_bytes(background)
+            del params["background"]
+            data.add_field('background_bytes', background, filename='background_bytes.png')
+
+        if isinstance(ava, str):
+            ava = await self.session.request_bytes(ava)
+        del params["ava"]
+        data.add_field("ava_bytes", ava, filename="ava_bytes.png")
+
+        response = await self.session.request_bytes(url=self.api_url+"GenerationQuotes", method="POST", params=params, data=data)
+        return response
 
 
     
