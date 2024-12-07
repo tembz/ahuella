@@ -1,4 +1,4 @@
-## Асинхронный типизированный модуль для работы с api.hella.team
+## Асинхронный модуль для работы с api.berht.dev
 
 ```python
 import asyncio
